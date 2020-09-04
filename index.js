@@ -8,6 +8,12 @@ function Book(title, author, isbn) {
 //UI Constructor
 function UI() {}
 
+UI.prototype.deleteBook = (target) => {
+  if (target.className === "delete") {
+    target.parentElement.parentElement.remove();
+  }
+};
+
 UI.prototype.showAlert = function (message, type) {
   //Create Alert
   const alert = document.createElement("div");
@@ -67,6 +73,16 @@ document.getElementById("book-form").addEventListener("submit", function (e) {
     // Alert
     ui.showAlert("Book Added!", "success");
   }
+
+  e.preventDefault();
+});
+
+// Event Listner for Delete
+document.getElementById("book-list").addEventListener("click", function (e) {
+  const ui = new UI();
+
+  ui.deleteBook(e.target);
+  ui.showAlert("Book Deleted", "success");
 
   e.preventDefault();
 });
